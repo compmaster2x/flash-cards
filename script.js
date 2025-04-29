@@ -1,9 +1,4 @@
-const cards = [
-    { question: "Столица Франции?", answer: "Париж" },
-    { question: "2 + 2?", answer: "4" },
-    { question: "Солнце — это...", answer: "Звезда" },
-    { question: "HTML расшифровывается как?", answer: "HyperText Markup Language" }
-  ];
+import cards from "./data/info.js";
   
   let current = 0;
   const front = document.getElementById("front");
@@ -32,6 +27,6 @@ const cards = [
     updateCard();
   });
   
-  // Инициализация
+
   updateCard();
   
