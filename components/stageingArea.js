@@ -24,7 +24,7 @@ function updateRememberedList(cardsData, rememberedListEl) {
 
             if(cardToUnremember){
                 cardToUnremember.isRemembered = false
-
+                saveCardsState(cardsData);
             updateCallBack(cardsData, rememberedListEl)
         }
 
@@ -37,6 +37,7 @@ function updateRememberedList(cardsData, rememberedListEl) {
     cardsData.forEach(card => {
         card.isRemembered = false
     })
+    
     updateCallBack(cardsData, rememberedListEl)
   }
   

@@ -58,8 +58,9 @@ function handleNextCard() {
 }
 
 function handleRemembered() {
-  saveCardsState(cardsData);
+  
   cardsData[currentIndex].isRemembered = true;
+  saveCardsState(cardsData);
   updateRememberedList(cardsData, rememberedListEl);
   const rememberedCount = cardsData.filter(card => card.isRemembered).length;
   if (rememberedCount === cardsData.length) {
