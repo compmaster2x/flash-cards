@@ -1,3 +1,5 @@
+//stageingArea.js
+import { displayScore } from "./handlers.js";
 function updateRememberedList(cardsData, rememberedListEl) {
     rememberedListEl.innerHTML = "";
     const remembered = cardsData.filter(card => card.isRemembered);
@@ -23,6 +25,7 @@ function updateRememberedList(cardsData, rememberedListEl) {
                 cardToUnremember.isRemembered = false
 
             updateCallBack(cardsData, rememberedListEl)
+            displayScore(); 
         }
 
         }
