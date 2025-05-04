@@ -1,5 +1,6 @@
 //handlers.js
 import { shuffleCards } from "./math.js";
+import { updateRememberedList } from "./stageingArea.js";
 
 let frontEl, backEl, cardEl, scoreEl, rememberedListEl;
 let cardsData = [];
@@ -14,7 +15,7 @@ function init({ front, back, card, score, cards, rememberedList }) {
   rememberedListEl = rememberedList;
   currentIndex = 0;
   updateCard();
-  updateRememberedList();
+  updateRememberedList(cardsData, rememberedListEl);
 }
 
 function updateCard() {
@@ -49,7 +50,7 @@ function handleNextCard() {
 function handleRemembered() {
   
   cardsData[currentIndex].isRemembered = true;
-  updateRememberedList(); 
+  updateRememberedList(cardsData, rememberedListEl);
   const rememberedCount = cardsData.filter(card => card.isRemembered).length;
   if (rememberedCount === cardsData.length) {
     showCongratsMessage();
@@ -62,15 +63,7 @@ function toggleFlip() {
   cardEl.classList.toggle("flipped");
 }
 
-function updateRememberedList(){
-  rememberedListEl.innerHTML = ""
-  const remembered = cardsData.filter(card => card.isRemembered)
-  remembered.forEach(card => {
-    const li = document.createElement("li")
-    li.innerHTML = `<strong>${card.question}</strong><br>${card.answer}`;
-    rememberedListEl.appendChild(li)
-  })
-}
+
 
 export {
   init,
