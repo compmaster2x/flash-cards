@@ -1,21 +1,29 @@
 //handlers.js
 import { shuffleCards } from "./math.js";
-import { updateRememberedList } from "./stageingArea.js";
+import { updateRememberedList, attachRemoveHandler, refreshButton   } from "./stageingArea.js";
 
-let frontEl, backEl, cardEl, scoreEl, rememberedListEl;
+let frontEl, backEl, cardEl, scoreEl, rememberedListEl, removeCardFromListEl;
 let cardsData = [];
 let currentIndex = 0;
 
-function init({ front, back, card, score, cards, rememberedList }) {
+function init({ front, back, card, score, cards, rememberedList, removeCardFromList }) {
   frontEl = front;
   backEl = back;
   cardEl = card;
   scoreEl = score;
   cardsData = cards;
   rememberedListEl = rememberedList;
+  removeCardFromListEl = removeCardFromList;
   currentIndex = 0;
   updateCard();
   updateRememberedList(cardsData, rememberedListEl);
+  attachRemoveHandler(cardsData, rememberedListEl, updateRememberedList); 
+}
+
+function handleRefresh() {
+  refreshButton(cardsData, rememberedListEl, updateRememberedList);
+  updateCard(); // чтобы обновить отображение текущей карточки
+  displayScore();
 }
 
 function updateCard() {
@@ -73,5 +81,6 @@ export {
   handleNextCard,
   handleRemembered,
   toggleFlip,
-  updateRememberedList
+  updateRememberedList,
+  handleRefresh
 };

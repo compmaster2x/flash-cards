@@ -1,11 +1,39 @@
 function updateRememberedList(cardsData, rememberedListEl) {
     rememberedListEl.innerHTML = "";
     const remembered = cardsData.filter(card => card.isRemembered);
-    remembered.forEach(card => {
+    remembered.forEach((card, index) => {
       const li = document.createElement("li");
+      
+      li.dataset.index = index; 
       li.innerHTML = `<strong>${card.question}</strong><br>${card.answer}`;
       rememberedListEl.appendChild(li);
     });
   }
+
+  function attachRemoveHandler(cardsData, rememberedListEl, updateCallBack){
+    rememberedListEl.addEventListener("click", (event) => {
+        if (event.target.tagName === "LI"){
+            const index = parseInt(event.target.dataset.index, 10)
+
+            const rememberedCards = cardsData.filter(c => c.isRemembered)
+
+            const cardToUnremember = rememberedCards[index]
+
+            if(cardToUnremember){
+                cardToUnremember.isRemembered = false
+
+            updateCallBack(cardsData, rememberedListEl)
+        }
+
+        }
+    })
+  }
+
+  function refreshButton(cardsData, rememberedListEl, updateCallBack){
+    cardsData.forEach(card => {
+        card.isRemembered = false
+    })
+    updateCallBack(cardsData, rememberedListEl)
+  }
   
-  export { updateRememberedList };
+  export { updateRememberedList, attachRemoveHandler, refreshButton };
