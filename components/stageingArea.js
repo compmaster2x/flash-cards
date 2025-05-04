@@ -1,3 +1,5 @@
+//stageingArea.js
+import { saveCardsState, clearCardsState } from "../localStorage/localStorageUtil.js";
 function updateRememberedList(cardsData, rememberedListEl) {
     rememberedListEl.innerHTML = "";
     const remembered = cardsData.filter(card => card.isRemembered);
@@ -13,6 +15,7 @@ function updateRememberedList(cardsData, rememberedListEl) {
   function attachRemoveHandler(cardsData, rememberedListEl, updateCallBack){
     rememberedListEl.addEventListener("click", (event) => {
         if (event.target.tagName === "LI"){
+            saveCardsState(cardsData);
             const index = parseInt(event.target.dataset.index, 10)
 
             const rememberedCards = cardsData.filter(c => c.isRemembered)
@@ -30,6 +33,7 @@ function updateRememberedList(cardsData, rememberedListEl) {
   }
 
   function refreshButton(cardsData, rememberedListEl, updateCallBack){
+    clearCardsState();
     cardsData.forEach(card => {
         card.isRemembered = false
     })

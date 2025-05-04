@@ -7,7 +7,14 @@ import {
   toggleFlip,
   handleRefresh
 } from "./components/handlers.js";
+import { loadCardsState } from "./localStorage/localStorageUtil.js";
 
+const savedCards = loadCardsState();
+if(savedCards){
+  cards.forEach((card, i) => {
+    card.isRemembered = savedCards[i]?.isRemembered || false
+  })
+}
 
 
 init({

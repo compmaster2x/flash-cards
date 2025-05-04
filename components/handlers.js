@@ -1,10 +1,12 @@
 //handlers.js
 import { shuffleCards } from "./math.js";
 import { updateRememberedList, attachRemoveHandler, refreshButton   } from "./stageingArea.js";
-
+import { saveCardsState } from "../localStorage/localStorageUtil.js";
 let frontEl, backEl, cardEl, scoreEl, rememberedListEl, removeCardFromListEl;
 let cardsData = [];
 let currentIndex = 0;
+
+
 
 function init({ front, back, card, score, cards, rememberedList, removeCardFromList }) {
   frontEl = front;
@@ -56,7 +58,7 @@ function handleNextCard() {
 }
 
 function handleRemembered() {
-  
+  saveCardsState(cardsData);
   cardsData[currentIndex].isRemembered = true;
   updateRememberedList(cardsData, rememberedListEl);
   const rememberedCount = cardsData.filter(card => card.isRemembered).length;
