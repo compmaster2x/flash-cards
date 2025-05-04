@@ -1,58 +1,9 @@
-import cards from "./data/info.js";
-import { shuffleCards } from "./components/math.js";
-
-let current = 0;
-const front = document.getElementById("front");
-const back = document.getElementById("back");
-const card = document.getElementById("card");
-const nextBtn = document.getElementById("nextBtn");
-const rememberBtn = document.getElementById("remembered");
-const score = document.getElementById("score");
-
-function updateCard() {
-  front.textContent = cards[current].question;
-  back.textContent = cards[current].answer;
-  card.classList.remove("flipped");
-  displayScore();
+function updateRememberedList() {
+  rememberedListEl.innerHTML = "";
+  const remembered = cardsData.filter(card => card.isRemembered);
+  remembered.forEach(card => {
+    const li = document.createElement("li");
+    li.textContent = card.question;
+    rememberedListEl.appendChild(li);
+  });
 }
-
-function displayScore() {
-  const rememberedCount = cards.filter(card => card.isRemembered).length;
-  score.innerHTML = `Score: ${rememberedCount}/${cards.length}`;
-}
-
-function showCongratsMessage() {
-  front.textContent = "🎉 Все карточки выучены!";
-  back.textContent = "";
-  score.innerHTML = `Score: ${cards.length}/${cards.length}`;
-  card.classList.remove("flipped");
-}
-
-function handleNextCard() {
-  const newIndex = shuffleCards(cards, current);
-
-  if (newIndex === -1) {
-    showCongratsMessage();
-    return;
-  }
-
-  current = newIndex;
-  updateCard();
-}
-
-function handleRemember() {
-  cards[current].isRemembered = true;
-  handleNextCard(); // автоматически переходим к следующей
-}
-
-function toggleFlip() {
-  card.classList.toggle("flipped");
-}
-
-// Привязка событий
-card.addEventListener("click", toggleFlip);
-nextBtn.addEventListener("click", handleNextCard);
-rememberBtn.addEventListener("click", handleRemember);
-
-// Инициализация
-updateCard();

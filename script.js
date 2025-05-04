@@ -1,3 +1,4 @@
+//main.js
 import cards from "./data/info.js";
 import {
   init,
@@ -11,7 +12,8 @@ init({
   back: document.getElementById("back"),
   card: document.getElementById("card"),
   score: document.getElementById("score"),
-  cards: cards
+  cards: cards,
+  rememberedList: document.getElementById("rememberedList")
 });
 
 document.getElementById("card").addEventListener("click", toggleFlip);
