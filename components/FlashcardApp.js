@@ -1,22 +1,39 @@
 import Flashcard from './flashCard.js'
 import FlashcardDeck from "./FlashcardDeck.js"
 import FlashcardUI from "./FlashCardUI.js"
-import cardsData from "../data/info.js"
+
 
 export default class FlashcardApp {
-    constructor({front, back, card, score, rememberedList}){
-        const flashcards = cardsData.map(data => new Flashcard(data.question, data.answer, data.isRemembered))//?
-        this.deck = new FlashcardDeck(flashcards)
+    constructor({front, back, card, score, rememberedList}) {
         this.ui = new FlashcardUI(front, back, card, score, rememberedList)
     }
 
-    init(){
-        // localStorage.removeItem("cardState");
-        this.deck.loadState()
-        this.ui.updateCard(this.deck.currentCard)
-        this.ui.updateScore(this.deck.rememberedCount, this.deck.cards.length)
-        this.ui.updateRememberedList(this.deck.cards)
-        this.attachHandlers()
+    async  init(){
+        
+        try{
+            const response = await fetch("http://localhost:3000/cards")
+            const data = await response.json()
+
+            if (!Array.isArray(data) || data.length === 0) {
+                throw new Error("API ne vernyl spisok")
+            }
+
+            const flashcards = data.map(
+                item => new Flashcard(item.question, item.answer, item.isRemembered ?? false)
+            )
+
+            this.deck = new FlashcardDeck(flashcards)
+
+            this.deck.loadState()
+            this.ui.updateCard(this.deck.currentCard)
+            this.ui.updateScore(this.deck.rememberedCount, this.deck.cards.length)
+            this.ui.updateRememberedList(this.deck.cards)
+            this.attachHandlers()
+        } catch (err) {
+            console.error("error init", err)
+            this.frontEl.textContent = "error load"
+            this.backEl.textContent = ""
+        }
     }
 
     attachHandlers(){

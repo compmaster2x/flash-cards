@@ -1,0 +1,8 @@
+{
+    "cards": [
+      { "question": "Столица Франции?", "answer": "Париж" },
+      { "question": "2 + 2?", "answer": "4" },
+      { "question": "HTML расшифровывается как?", "answer": "HyperText Markup Language" }
+    ]
+  }
+  
