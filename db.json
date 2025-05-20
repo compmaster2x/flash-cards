@@ -1,8 +1,19 @@
 {
-    "cards": [
-      { "question": "Столица Франции?", "answer": "Париж" },
-      { "question": "2 + 2?", "answer": "4" },
-      { "question": "HTML расшифровывается как?", "answer": "HyperText Markup Language" }
-    ]
-  }
-  
+  "cards": [
+    { "question": "Столица Франции?", "answer": "Париж" },
+    { "question": "2 + 2?", "answer": "4" },
+    { "question": "HTML расшифровывается как?", "answer": "HyperText Markup Language" },
+    { "question": "CSS отвечает за?", "answer": "Стилизацию страниц" },
+    { "question": "Что такое JavaScript?", "answer": "Язык программирования" },
+    { "question": "Сколько бит в байте?", "answer": "8" },
+    { "question": "Цвет фона по умолчанию у body?", "answer": "Белый" },
+    { "question": "Кто разработал WWW?", "answer": "Тим Бернерс-Ли" },
+    { "question": "Год создания JavaScript?", "answer": "1995" },
+    { "question": "Что такое DOM?", "answer": "Document Object Model" },
+    { "question": "React — это?", "answer": "Библиотека JS для интерфейсов" },
+    { "question": "Назначение Git?", "answer": "Система контроля версий" },
+    { "question": "Какой тег для заголовков?", "answer": "<h1> - <h6>" },
+    { "question": "Команда для клонирования репозитория?", "answer": "git clone" },
+    { "question": "Что такое API?", "answer": "Application Programming Interface" }
+  ]
+}

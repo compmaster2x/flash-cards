@@ -40,26 +40,28 @@ export default class FlashcardDeck {
     }
 
     saveState(){
-        const state = {
-            cards: this.cards,
-            currentIndex: this.currentIndex
-        };
-        localStorage.setItem("cardState", JSON.stringify(this.cards)) //?
-    }
+    const state = {
+        cards: this.cards,
+        currentIndex: this.currentIndex
+    };
+    localStorage.setItem("cardState", JSON.stringify(state))  // Сохраняем объект целиком
+}
+
 
     loadState() {
-        const saved = JSON.parse(localStorage.getItem("cardState"));
-        if (!saved) return;
-    
-        saved.forEach((savedCard, i) => {
-            if (this.cards[i]) {
-                this.cards[i].isRemembered = !!savedCard.isRemembered;
-            }
-        });
-        if (typeof saved.currentIndex === "number") {
-            this.currentIndex = saved.currentIndex;
+    const saved = JSON.parse(localStorage.getItem("cardState"));
+    if (!saved) return;
+
+    saved.cards.forEach((savedCard, i) => {
+        if (this.cards[i]) {
+            this.cards[i].isRemembered = !!savedCard.isRemembered;
         }
+    });
+    if (typeof saved.currentIndex === "number") {
+        this.currentIndex = saved.currentIndex;
     }
+}
+
     
 
     clearState(){

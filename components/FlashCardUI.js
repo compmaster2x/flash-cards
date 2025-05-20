@@ -39,5 +39,30 @@ export default class FlashcardUI{
             this.rememberedListEl.appendChild(li)
         });
     }
+
+    setTimer(seconds, onTimeUp) {
+    clearInterval(this.timerInterval)
+
+    this.timerEl = document.getElementById("timer")
+    this.timerEl.textContent = `⏱ ${seconds}`
+
+    this.timerInterval = setInterval(() => {
+        seconds--
+        if (seconds <= 0) {
+            clearInterval(this.timerInterval)
+            this.timerEl.textContent = "⏱ 0"
+            if (onTimeUp) onTimeUp()
+        } else {
+            this.timerEl.textContent = `⏱ ${seconds}`
+        }
+    }, 1000)
+}
+
+clearTimer() {
+    clearInterval(this.timerInterval)
+    const timerEl = document.getElementById("timer")
+    if (timerEl) timerEl.textContent = ""
+}
+
 }
 

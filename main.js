@@ -8,4 +8,4 @@ const app = new FlashcardApp({
     rememberedList: document.getElementById("rememberedList")
 })
 
-await app.init()
+app.init()  
